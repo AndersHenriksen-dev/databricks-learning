@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+
+[project]
+name = "databricks_learning"
+version = "0.0.1"
+description = "Tiny package for databricks DAB demo"
+authors = [{name="Anders Henriksen"}]
+
+[project.scripts]
+square-sum = "mypkg.simple:square_sum_runner"
+
+# -------- Setuptools Configuration --------
+[tool.setuptools.packages.find]
+where = ["bundle/src"]
+include = ["databricks_learning*"]
+
+[tool.setuptools]
+package-dir = {"" = "bundle/src"}
