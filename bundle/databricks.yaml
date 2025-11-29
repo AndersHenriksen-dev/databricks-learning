@@ -1,0 +1,13 @@
+bundle:
+  name: simple-dab
+
+include:
+  - resources/*.yml
+
+workspace:
+  host: https://dbc-a09d4333-2ac2.cloud.databricks.com/
+
+targets:
+  dev:
+    default: true
+    mode: development

@@ -1,0 +1,33 @@
+resources:
+  jobs:
+    serverless_job:
+      name: "simple-serverless-job"
+
+      # Optional: run this job once an hour
+      trigger:
+        periodic:
+          interval: 1
+          unit: HOURS
+
+      job_clusters:
+        - job_cluster_key: serverless_cluster
+          # Use serverless_job_cluster instead of new_cluster or client
+          serverless_job_cluster:
+            spark_version: "12.2.x-scala2.12"
+            # You can add optional spark configs if needed:
+            # spark_conf:
+            #   "spark.databricks.cluster.profile": "serverless"
+
+      tasks:
+        - task_key: run_python_task
+          job_cluster_key: serverless_cluster
+          python_wheel_task:
+            package_name: "mypkg"
+            entry_point: "mypkg.simple:square_sum_runner"
+
+      # Optional: environment specs for future expansion
+      environments:
+        - environment_key: default
+          spec:
+            dependencies:
+              - "cowsay"  # example dependency; remove if not needed
